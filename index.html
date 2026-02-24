@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lilly Wen — Business Development & Product Management (AI)</title>
+  <meta name="description" content="Lilly Wen — Business & Product Management focused on AI-enabled platforms, secure decisioning, and regulated enterprise systems." />
+
+  <style>
+    :root{
+      --bg0:#070A12;
+      --bg1:#0B1220;
+      --text:#E8EEF7;
+      --muted:#A9B4C6;
+      --muted2:#7F8CA3;
+
+      --blue:#3B82F6;
+      --blue2:#60A5FA;
+      --blue3:#93C5FD;
+      --ice:#E0F2FE;
+      --grey:#94A3B8;
+
+      --ok:#22C55E;
+      --warn:#F59E0B;
+
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --stroke: rgba(148,163,184,.22);
+      --radius: 18px;
+
+      --wrapPadTop: 28px;
+      --wrapPadBottom: 40px;
+      --gridGap: 16px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(59,130,246,.25), transparent 60%),
+        radial-gradient(900px 600px at 80% 20%, rgba(148,163,184,.18), transparent 55%),
+        radial-gradient(1200px 900px at 40% 100%, rgba(96,165,250,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 40%, #070A12);
+      overflow-x:hidden;
+    }
+
+    /* subtle animated grain + aurora */
+    .fx::before{
+      content:"";
+      position:fixed; inset:-30%;
+      background:
+        radial-gradient(closest-side at 20% 30%, rgba(59,130,246,.18), transparent 60%),
+        radial-gradient(closest-side at 70% 20%, rgba(148,163,184,.13), transparent 55%),
+        radial-gradient(closest-side at 60% 80%, rgba(96,165,250,.12), transparent 60%);
+      filter: blur(18px);
+      animation: float 10s ease-in-out infinite alternate;
+      pointer-events:none;
+      z-index:-2;
+    }
+    .fx::after{
+      content:"";
+      position:fixed; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.18;
+      pointer-events:none;
+      z-index:-1;
+    }
+    @keyframes float{
+      from{transform: translate3d(-1.2%, -1.0%, 0) scale(1.02)}
+      to  {transform: translate3d( 1.0%,  1.4%, 0) scale(1.06)}
+    }
+
+    .wrap{
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--wrapPadTop) 18px var(--wrapPadBottom);
+      min-height: 100vh;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .brand{display:flex; flex-direction:column; gap:10px;}
+    .name{
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 800;
+      letter-spacing:.2px;
+      line-height:1.1;
+    }
+    .tagline{
+      color:var(--muted);
+      max-width: 72ch;
+      font-size: 14.5px;
+      line-height:1.45;
+    }
+    .pills{display:flex; flex-wrap:wrap; gap:10px; margin-top: 6px;}
+    .pill{
+      border:1px solid var(--stroke);
+      background: rgba(15,26,46,.55);
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12.5px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      box-shadow: 0 10px 28px rgba(0,0,0,.24);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: var(--blue);
+      box-shadow: 0 0 0 6px rgba(59,130,246,.15);
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:flex-start;
+    }
+    .btn{
+      border: 1px solid var(--stroke);
+      background: rgba(15,26,46,.55);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.30);
+      cursor:pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(96,165,250,.45);
+      background: rgba(15,26,46,.75);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 0.95fr 1.25fr;
+      gap: var(--gridGap);
+      align-items: stretch;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .card{
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(15,26,46,.70), rgba(12,21,38,.62));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height: 0;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(700px 250px at 30% 0%, rgba(96,165,250,.20), transparent 55%);
+      pointer-events:none;
+    }
+    .cardhead{
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 14px 14px 10px;
+      border-bottom:1px solid rgba(148,163,184,.14);
+      position:relative;
+      flex: 0 0 auto;
+    }
+    .title{
+      font-weight: 750;
+      letter-spacing:.2px;
+      font-size: 14px;
+      color: var(--text);
+      display:flex; gap:10px; align-items:center;
+    }
+    .subtitle{color: var(--muted2); font-size: 12px;}
+    .body{
+      padding: 14px;
+      position:relative;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    /* Timeline scroll */
+    .scrollY{
+      height: 100%;
+      overflow: auto;
+      padding-right: 6px;
+      scrollbar-gutter: stable;
+    }
+    .scrollY::-webkit-scrollbar{width:10px}
+    .scrollY::-webkit-scrollbar-thumb{
+      background: rgba(148,163,184,.22);
+      border-radius: 999px;
+      border: 2px solid rgba(12,21,38,.65);
+    }
+    .scrollY::-webkit-scrollbar-track{
+      background: rgba(8,14,26,.25);
+      border-radius: 999px;
+    }
+
+    .timeline{display:flex; flex-direction:column; gap:12px;}
+    .timelineItem{
+      position:relative;
+      padding-left: 18px;
+      border-left: 2px solid rgba(96,165,250,.25);
+      margin-left: 6px;
+    }
+    .timelineItem::before{
+      content:"";
+      position:absolute;
+      left:-7px; top: 7px;
+      width:12px; height:12px; border-radius:99px;
+      background: var(--blue);
+      box-shadow: 0 0 0 7px rgba(59,130,246,.14);
+    }
+    .when{font-size: 12px; color: var(--muted2); letter-spacing:.2px;}
+    .role{font-size: 14px; font-weight: 720; margin-top: 2px;}
+    .org{font-size: 12.5px; color: var(--muted); margin-top: 2px;}
+    .bullets{
+      margin: 8px 0 0;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 12.8px;
+      line-height: 1.45;
+    }
+    .bullets li{margin: 6px 0}
+
+    /* SECTION 2: no figures on the right; keep bright label chips */
+    .kv{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-bottom: 14px;
+    }
+    .kvrow{
+      border:1px solid rgba(148,163,184,.16);
+      background: rgba(8,14,26,.35);
+      border-radius: 14px;
+      padding: 10px 10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .k{
+      font-size: 12px;
+      letter-spacing:.25px;
+      font-weight: 800;
+      color: var(--ice);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(147,197,253,.35);
+      background: linear-gradient(180deg, rgba(59,130,246,.20), rgba(96,165,250,.08));
+      box-shadow: 0 10px 26px rgba(0,0,0,.22), 0 0 0 6px rgba(59,130,246,.06);
+      white-space:nowrap;
+    }
+    .k::before{
+      content:"";
+      width:8px; height:8px;
+      border-radius:999px;
+      background: var(--blue3);
+      box-shadow: 0 0 0 6px rgba(147,197,253,.12);
+    }
+    .v{
+      font-size: 13px;
+      color: var(--text);
+      text-align:right;
+      font-weight: 750;
+    }
+
+    /* Key Achievements heading */
+    .sectionTitle{
+      margin-top: 4px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(96,165,250,.28);
+      background: linear-gradient(180deg, rgba(59,130,246,.16), rgba(12,21,38,.08));
+      box-shadow: 0 14px 40px rgba(0,0,0,.22);
+    }
+    .sectionTitle .left{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 900;
+      letter-spacing:.25px;
+      color: var(--ice);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    .spark{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--blue2);
+      box-shadow: 0 0 0 8px rgba(96,165,250,.12), 0 0 28px rgba(96,165,250,.22);
+    }
+    .sectionTitle .right{
+      font-size: 12px;
+      color: var(--muted2);
+      font-weight: 700;
+    }
+
+    /* Achievement items with ICONS (not dots) */
+    .ach{
+      margin-top: 10px;
+      display:grid;
+      gap:10px;
+    }
+    .achItem{
+      border:1px solid rgba(148,163,184,.16);
+      background: rgba(8,14,26,.30);
+      border-radius: 14px;
+      padding: 10px 10px;
+    }
+    .achHead{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    /* abstract icon chip */
+    .achIcon{
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(96,165,250,.28);
+      background: rgba(12,21,38,.38);
+      box-shadow: 0 16px 46px rgba(0,0,0,.25);
+      flex: 0 0 auto;
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      margin-top: 1px;
+    }
+    .achIcon::after{
+      content:"";
+      position:absolute;
+      inset:-12px;
+      background: radial-gradient(closest-side at 30% 25%, rgba(147,197,253,.22), transparent 65%);
+      filter: blur(10px);
+      opacity:.95;
+      pointer-events:none;
+    }
+
+    /* Icon: venture (rocket) - abstract */
+    .achIcon.venture::before{
+      content:"";
+      position:absolute;
+      width:10px; height:16px;
+      border-radius: 8px 8px 10px 10px;
+      border: 2px solid rgba(147,197,253,.75);
+      transform: rotate(18deg);
+      z-index:1;
+    }
+    .achIcon.venture span{
+      width:4px; height:4px; border-radius:999px;
+      background: rgba(96,165,250,.85);
+      box-shadow: 8px 8px 0 rgba(34,197,94,.55);
+      transform: translate(6px,6px);
+      z-index:2;
+    }
+
+    /* Icon: award (trophy) - abstract */
+    .achIcon.award::before{
+      content:"";
+      position:absolute;
+      width:16px; height:10px;
+      border: 2px solid rgba(245,158,11,.75);
+      border-bottom:none;
+      border-radius: 10px 10px 2px 2px;
+      z-index:1;
+    }
+    .achIcon.award span{
+      width:10px; height:2px;
+      background: rgba(245,158,11,.75);
+      box-shadow: 0 6px 0 rgba(147,197,253,.25);
+      transform: translateY(8px);
+      z-index:2;
+    }
+
+    /* Icon: fraud/identity signals (network nodes) - abstract */
+    .achIcon.api::before{
+      content:"";
+      position:absolute;
+      width:4px; height:4px; border-radius:999px;
+      background: rgba(147,197,253,.9);
+      box-shadow:
+        10px -4px 0 rgba(96,165,250,.65),
+        -10px 6px 0 rgba(96,165,250,.55),
+        0px 12px 0 rgba(59,130,246,.65);
+      z-index:2;
+    }
+    .achIcon.api span{
+      width:18px; height:18px;
+      border-radius: 12px;
+      border: 1px dashed rgba(96,165,250,.35);
+      z-index:1;
+    }
+
+    .achTitle{
+      font-weight: 850;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+    .achItem p{
+      margin: 6px 0 0 40px; /* aligns with icon */
+      color: var(--muted);
+      font-size: 12.8px;
+      line-height: 1.45;
+    }
+
+    /* Chatbot stretch */
+    .chatTop{
+      padding: 14px 14px 10px;
+      border-bottom:1px solid rgba(148,163,184,.14);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      background: linear-gradient(180deg, rgba(15,26,46,.74), rgba(12,21,38,.40));
+      flex: 0 0 auto;
+    }
+    .chatTitle{display:flex; flex-direction:column; gap:2px;}
+    .chatTitle strong{font-size: 14px; letter-spacing:.2px;}
+    .chatTitle small{font-size: 12px; color: var(--muted2);}
+    .glow{
+      width: 10px; height:10px; border-radius:999px;
+      background: var(--ok);
+      box-shadow: 0 0 0 8px rgba(34,197,94,.12), 0 0 30px rgba(34,197,94,.20);
+      flex:0 0 auto;
+    }
+    .iframeWrap{
+      position:relative;
+      padding: 14px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .iframeFrame{
+      height: 100%;
+      border:1px solid rgba(96,165,250,.30);
+      border-radius: 16px;
+      overflow:hidden;
+      background: rgba(8,14,26,.45);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      position:relative;
+    }
+    .iframeFrame::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: linear-gradient(120deg, rgba(59,130,246,.40), rgba(148,163,184,.16), rgba(96,165,250,.35));
+      filter: blur(18px);
+      opacity:.35;
+      pointer-events:none;
+      z-index:0;
+    }
+    iframe{
+      position:relative;
+      z-index:1;
+      width:100%;
+      height: 100%;
+      border:0;
+      background: transparent;
+    }
+
+    footer{
+      color:var(--muted2);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      opacity:.95;
+    }
+
+    @media (max-width: 1100px){
+      .grid{grid-template-columns: 1fr 1fr;}
+      .chatCol{grid-column: 1 / -1;}
+    }
+    @media (max-width: 720px){
+      header{flex-direction:column; align-items:stretch;}
+      .actions{justify-content:flex-start;}
+      .grid{grid-template-columns: 1fr;}
+      .achItem p{margin-left: 0;}
+    }
+  </style>
+</head>
+
+<body class="fx">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="name">Lilly Wen</div>
+        <div class="tagline">
+          Business &amp; Product Management focused on <b>AI-enabled platforms</b>, customer focus, secure decisioning, and revenue-critical enterprise systems across regulated markets.
+        </div>
+
+        <div class="pills">
+          <span class="pill"><span class="dot"></span>AI Product • Digital Platforms</span>
+          <span class="pill"><span class="dot" style="background:var(--grey); box-shadow:0 0 0 6px rgba(148,163,184,.12)"></span>Security • Risk • Governance</span>
+          <span class="pill"><span class="dot" style="background:var(--blue2); box-shadow:0 0 0 6px rgba(96,165,250,.12)"></span>Business Mgmt • GTM</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="scrollToId('highlights')">✦ Highlights</button>
+        <button class="btn" onclick="scrollToId('timeline')">⟲ Experience</button>
+        <button class="btn" onclick="scrollToId('chatbot')">⌁ AI Chat</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- LEFT: Timeline -->
+      <section class="card" id="timeline">
+        <div class="cardhead">
+          <div class="title">Experience Timeline <span class="subtitle">Latest → Earliest</span></div>
+          <div class="subtitle">Scroll inside</div>
+        </div>
+
+        <div class="body">
+          <div class="scrollY">
+            <div class="timeline">
+              <div class="timelineItem">
+                <div class="when">Jul 2024 — Present</div>
+                <div class="role">Senior Business Development Specialist (Product & Portfolio)</div>
+                <div class="org">Ericsson Global Network Platform • Stockholm (Global scope)</div>
+                <ul class="bullets">
+                  <li>Drove multi-region pipeline growth (Europe, LATAM, APAC incl. AU/NZ).</li>
+                  <li>Commercialised CAMARA network APIs for identity & fraud-signal use cases.</li>
+                  <li>Built/led a team of 7; improved deal velocity through partner playbooks.</li>
+                </ul>
+              </div>
+
+              <div class="timelineItem">
+                <div class="when">Nov 2023 — Jun 2024</div>
+                <div class="role">Founder & CEO (Internal Venture) — Ericsson On-Air</div>
+                <div class="org">Ericsson • Secure broadcast / critical communication over 5G</div>
+                <ul class="bullets">
+                  <li>Launched a secure service model with high-visibility industry showcases.</li>
+                  <li>Owned 0→1 execution: proposition, stakeholders, delivery, and market readiness.</li>
+                </ul>
+              </div>
+
+              <div class="timelineItem">
+                <div class="when">May 2020 — Nov 2023</div>
+                <div class="role">Product & Business Development — Highly Regulated Networks</div>
+                <div class="org">Ericsson • Transport / digital airspace / live broadcast</div>
+                <ul class="bullets">
+                  <li>Led ecosystem + regulator engagement; turned ambiguity into compliant delivery.</li>
+                  <li>Drove platform patterns for risk, auditability, and operational resilience.</li>
+                </ul>
+              </div>
+
+              <div class="timelineItem">
+                <div class="when">Oct 2015 — May 2020</div>
+                <div class="role">Platform Product Management — Telco as-a-Service</div>
+                <div class="org">Ericsson • Global platform governance</div>
+                <ul class="bullets">
+                  <li>Owned release governance, readiness, and financial controls at scale.</li>
+                  <li>Aligned security operations to ISO/NIST approaches and reduced supplier cost.</li>
+                </ul>
+              </div>
+
+              <div class="timelineItem">
+                <div class="when">Oct 2008 — Sep 2015</div>
+                <div class="role">Customer Solution Responsible & Senior Architect</div>
+                <div class="org">Ericsson Australia • BSS/OSS, billing/charging, revenue assurance</div>
+                <ul class="bullets">
+                  <li>Designed BSS/OSS integrations supporting billing, charging & revenue integrity.</li>
+                  <li>Implemented financial / revenue assurance controls to reduce leakage & errors.</li>
+                </ul>
+              </div>
+
+              <div class="timelineItem">
+                <div class="when">Jan 2008 — Aug 2008</div>
+                <div class="role">System Designer — Machine Vision</div>
+                <div class="org">Industrial inspection • ML-based quality automation</div>
+                <ul class="bullets">
+                  <li>Designed ML algorithms for industrial-grade inspection solutions.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MIDDLE: Highlights (no right-side figures; achievements use icons) -->
+      <section class="card" id="highlights">
+        <div class="cardhead">
+          <div class="title">Profile Highlights <span class="subtitle">Signal in 30 seconds</span></div>
+          <div class="subtitle">Clean</div>
+        </div>
+
+        <div class="body">
+          <div class="kv">
+            <div class="kvrow"><div class="k">Current location</div><div class="v">Stockholm, Sweden</div></div>
+            <div class="kvrow"><div class="k">Relocation</div><div class="v">Yes — Australia preferred</div></div>
+            <div class="kvrow"><div class="k">Nationality</div><div class="v">Australian</div></div>
+            <div class="kvrow"><div class="k">US security clearance</div><div class="v">Recent — on request</div></div>
+            <div class="kvrow"><div class="k">Target roles</div><div class="v">AI Product • Business Mgmt</div></div>
+          </div>
+
+          <div class="sectionTitle">
+            <div class="left"><span class="spark"></span>Key Achievements</div>
+            <div class="right">Top 3</div>
+          </div>
+
+          <div class="ach">
+            <div class="achItem">
+              <div class="achHead">
+                <div class="achIcon venture" aria-hidden="true"><span></span></div>
+                <div class="achTitle">0→1 venture leadership (Founder/CEO)</div>
+              </div>
+              <p>Built and launched an internal venture with a secure service model and high-visibility industry demonstrations.</p>
+            </div>
+
+            <div class="achItem">
+              <div class="achHead">
+                <div class="achIcon award" aria-hidden="true"><span></span></div>
+                <div class="achTitle">GSMA Foundry Excellence Award (2023)</div>
+              </div>
+              <p>Led a 5G program where compliance, stakeholder alignment, and delivery excellence were core to success.</p>
+            </div>
+
+            <div class="achItem">
+              <div class="achHead">
+                <div class="achIcon api" aria-hidden="true"><span></span></div>
+                <div class="achTitle">Commercialised fraud/identity risk signals (Network APIs)</div>
+              </div>
+              <p>Drove go-to-market and stakeholder alignment for API-based risk signalling applicable to secure transactions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Chatbot -->
+      <section class="card chatCol" id="chatbot">
+        <div class="chatTop">
+          <div class="chatTitle">
+            <strong>Ask My AI Assistant</strong>
+            <small>Roles • Projects • Fit • Fast Q&amp;A</small>
+          </div>
+          <div class="glow" title="Online"></div>
+        </div>
+
+        <div class="iframeWrap">
+          <div class="iframeFrame">
+            <iframe
+              src="https://udify.app/chatbot/eMegXGh1NLNov0Sl"
+              frameborder="0"
+              allow="microphone">
+            </iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="y"></span> Lilly Wen • One-page portfolio</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <span style="color:var(--muted2)">Business &amp; Product Management • AI</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const scrollToId = (id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    };
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
